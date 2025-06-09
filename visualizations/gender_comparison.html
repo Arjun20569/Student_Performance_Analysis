@@ -1,0 +1,15 @@
+# Melt the DataFrame to compare scores by gender across subjects
+df_melted = df.melt(id_vars=["gender"], 
+                    value_vars=["math score", "reading score", "writing score"],
+                    var_name="subject", value_name="score")
+
+# Create grouped bar chart using Plotly Express
+fig = px.bar(df_melted, x="subject", y="score", color="gender", barmode="group",
+             title="Gender-based Comparison of Student Performance",
+             labels={"score": "Average Score", "subject": "Subject"})
+
+# Save to HTML
+output_path = "/mnt/data/gender_comparison.html"
+fig.write_html(output_path)
+
+output_path
