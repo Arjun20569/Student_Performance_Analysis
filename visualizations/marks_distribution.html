@@ -1,0 +1,14 @@
+import plotly.express as px
+
+# Create histogram for Math, Reading, and Writing scores
+fig = px.histogram(df.melt(var_name="subject", value_name="score", 
+                           id_vars=[],
+                           value_vars=["math score", "reading score", "writing score"]),
+                   x="score", color="subject", barmode="overlay",
+                   title="Marks Distribution Across Subjects")
+
+# Save to HTML
+output_path = "/mnt/data/marks_distribution.html"
+fig.write_html(output_path)
+
+output_path
