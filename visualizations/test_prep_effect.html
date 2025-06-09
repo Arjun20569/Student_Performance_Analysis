@@ -1,0 +1,18 @@
+import pandas as pd
+import plotly.express as px
+
+# Load your dataset
+df = pd.read_csv("StudentsPerformance.csv")
+
+# Melt the data to long format for Plotly
+df_melted = df.melt(id_vars=["test preparation course"],
+                    value_vars=["math score", "reading score", "writing score"],
+                    var_name="subject", value_name="score")
+
+# Create box plot to visualize test preparation effect
+fig = px.box(df_melted, x="subject", y="score", color="test preparation course",
+             title="Effect of Test Preparation on Student Scores",
+             labels={"score": "Score", "subject": "Subject", "test preparation course": "Test Prep"})
+
+# Save as HTML
+fig.write_html("test_prep_effect.html")
